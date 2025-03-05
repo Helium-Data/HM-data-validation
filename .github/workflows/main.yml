@@ -2,7 +2,7 @@ name: Extract and Load Credit Data
 
 env:
   SSH_PRIVATE_KEY: ${{secrets.SECRET_TOKEN}}
-  ENVIRONMENT_BASE64: ${{secrets.HELIUM_HEALTH_CREDS}}
+  ENVIRONMENT_BASE64: ${{secrets.ENV_FILE}}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 on:
