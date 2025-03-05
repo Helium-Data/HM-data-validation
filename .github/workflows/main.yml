@@ -1,4 +1,4 @@
-name: Extract and Load Credit Data
+name: Generate Report
 
 env:
   SSH_PRIVATE_KEY: ${{secrets.SECRET_TOKEN}}
