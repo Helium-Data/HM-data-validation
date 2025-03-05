@@ -12,7 +12,7 @@ __pycache__/
 *.ipynb
 
 # ignore generated report
-*.txt
+HTHA_Data_Validity_Report.txt
 
 # ignore generated table
 *.csv

@@ -1,7 +1,7 @@
 import smtplib
 import os
 from email.message import EmailMessage
-from config import recipient_email, sender_email
+from config import recipient_email
 
 def send_email(sender_password, file_path):
     """
