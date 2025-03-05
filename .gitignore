@@ -1,0 +1,18 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore env file
+.env
+
+# # Ignore OS files
+.DS_Store
+
+# ignore python notebooks
+*.ipynb
+
+# ignore generated report
+*.txt
+
+# ignore generated table
+*.csv
