@@ -34,13 +34,3 @@ def send_email(sender_password, file_path):
         print("Email sent successfully!")
     except Exception as e:
         print(f" Error sending email: {e}")
-
-# Example usage
-# send_email(
-#     sender_email="data@heliumhealth.com",
-#     sender_password="",  
-#     recipient_email="obiechina@heliumhealth.com",
-#     subject="HTHA Data Validity Check Report",
-#     body="Please find the attached report.",
-#     file_path="HTHA_Data_Validity_Check_Report.txt"
-# )
