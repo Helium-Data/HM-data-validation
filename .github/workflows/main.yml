@@ -32,7 +32,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
 
