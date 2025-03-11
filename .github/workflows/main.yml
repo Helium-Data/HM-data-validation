@@ -34,9 +34,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-          -i ~/.ssh/id_rsa -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 \
-          ubuntu@bastion.onemedtest.com
+          ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
 
 
       - name: Run Pipeline Script
