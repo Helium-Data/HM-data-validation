@@ -1,7 +1,7 @@
 name: Generate Report
 
 env:
-  SSH_PRIVATE_KEY: ${{secrets.SSH_PERSONAL}}
+  SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
   ENVIRONMENT_BASE64: ${{secrets.ENV_FILE}}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
