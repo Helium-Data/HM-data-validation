@@ -42,7 +42,7 @@ jobs:
 
       - name: Start SSH Tunnel
         run: |
-          ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com &
+          ssh -L -N 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com &
           sleep 5 
           ps aux | grep ssh
 
