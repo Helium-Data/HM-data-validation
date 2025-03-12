@@ -29,22 +29,21 @@ jobs:
       - name: Decode Google Credentials
         run: echo "$ENVIRONMENT_BASE64" | base64 --decode > .env
 
-      - name: Set up SSH
+      - name: Add private SSH key
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
-      - name: test step 1
-        run: cat ~/.ssh/id_rsa
 
       - name: Add host key
         run: |
           ssh-keyscan bastion.onemedtest.com >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
-      - name: test step
-        run: ssh -i ~/.ssh/id_rsa -v ubuntu@bastion.onemedtest.com 
+      - name: Start SSH Tunnel
+        run: ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+
+        # ssh -i ~/.ssh/id_rsa -v ubuntu@bastion.onemedtest.com 
           # ssh -T -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
 
       - name: Run Pipeline Script
