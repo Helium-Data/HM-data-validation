@@ -16,8 +16,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: test step
-        run: echo "$SSH_PRIVATE_KEY"
+    
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -35,7 +34,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -T -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+
+      - name: test step
+        run: ssh -v -i ~/.ssh/id_rsa ubuntu@bastion.onemedtest.com 
+          # ssh -T -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+
+      - name: test step
+        run: ssh -v -i ~/.ssh/id_rsa ubuntu@bastion.onemedtest.com
 
 
       - name: Run Pipeline Script
