@@ -35,6 +35,9 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
+      - name: test step 1
+        run: cat ~/.ssh/id_rsa
+
       - name: Add host key
         run: |
           ssh-keyscan bastion.onemedtest.com >> ~/.ssh/known_hosts
