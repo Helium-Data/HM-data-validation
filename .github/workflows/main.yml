@@ -41,7 +41,10 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Start SSH Tunnel
-        run: ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+        run: |
+          ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+          sleep 5 
+          netstat -tlnp | grep 6667 
 
         # ssh -i ~/.ssh/id_rsa -v ubuntu@bastion.onemedtest.com 
           # ssh -T -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
