@@ -1,7 +1,7 @@
 name: Generate Report
 
 env:
-  SSH_PRIVATE_KEY: ${{secrets.SECRET_TOKEN}}
+  SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
   ENVIRONMENT_BASE64: ${{secrets.ENV_FILE}}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+    
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -29,12 +29,25 @@ jobs:
       - name: Decode Google Credentials
         run: echo "$ENVIRONMENT_BASE64" | base64 --decode > .env
 
-      - name: Set up SSH
+      - name: Add private SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
+
+      - name: Add host key
+        run: |
+          ssh-keyscan bastion.onemedtest.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Start SSH Tunnel
+        run: |
+          ssh -fN -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com &
+          sleep 5 
+          ps aux | grep ssh
+
+        # ssh -i ~/.ssh/id_rsa -v ubuntu@bastion.onemedtest.com 
+          # ssh -T -L 6667:ars-rapid-prod-db.cmyqyq1ypwcc.eu-west-1.rds.amazonaws.com:5432 ubuntu@bastion.onemedtest.com
 
       - name: Run Pipeline Script
         run: python generate_report.py
