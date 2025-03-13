@@ -19,14 +19,14 @@ def import_data():
 
     try:
         end_date = datetime.now()
-        start_date = end_date - timedelta(days=7)
+        start_date = end_date - timedelta(days=1)
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")
 
         query = f"""SELECT disease, patient_response
 	                FROM ars.patient_risks
 	                WHERE disease in ('Diabetes', 'Tuberculosis', 'HIV')
-                    and "createdAt" between '2025-02-21' and '2025-02-27'
+                    and "createdAt" between '{start_date}' and '{end_date}'
 	                """
                     
                     # and "createdAt" between '{start_date}' and '{end_date}'

@@ -137,7 +137,7 @@ def generate_report():
     # ---------------------------------Report------------------------------------------------
     report_date = datetime.today().strftime('%b %d, %Y')
     end_date = datetime.now()
-    start_date = end_date - timedelta(days=7)
+    start_date = end_date - timedelta(days=1)
     start_date = start_date.strftime('%b %d, %Y')
     end_date = end_date.strftime('%b %d, %Y')
 
