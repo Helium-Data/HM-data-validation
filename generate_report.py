@@ -40,14 +40,17 @@ def generate_report():
 
         # Missing compulsory/follow up questions
         # If yes to 9a, answer 10a -15a
-        for i in range(11, 16):
+        for i in range(10, 16):
             df_HIV[f"Q{i}a_val"] = np.where((df_HIV['Q9a'] == "Yes") & (df_HIV[f"Q{i}a"].notna()), "valid", 
                                             np.where((df_HIV['Q9a'] == "No") & (df_HIV[f"Q{i}a"].isna()), "valid", None))
         
 
         # If 2a male then 10a must not null
-        df_HIV['Q10a_val'] = np.where((df_HIV['Q2a'] == "Male") & (df_HIV['Q10a'].notna()) , "valid",
-                                      np.where((df_HIV['Q2a'] == "Female") & (df_HIV['Q10a'].isna()), "valid", None)) #########
+        # df_HIV['Q10a_val'] = np.where((df_HIV['Q9a'] == "Yes") & (df_HIV['Q10a'].notna()) , "valid",
+        #                               np.where((df_HIV['Q9a'] == "No") & (df_HIV['Q10a'].isna()), "valid", None))
+        
+        
+         #########
 
         
         HIV_total_missing_question = int(df_HIV[[f"Q{i}a_val" for i in range(1, 23)]].isnull().sum().sum())
