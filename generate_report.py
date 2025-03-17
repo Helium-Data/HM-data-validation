@@ -46,8 +46,8 @@ def generate_report():
         
 
         # If 2a male then 10a must not null
-        # df_HIV['Q10a_val'] = np.where((df_HIV['Q9a'] == "Yes") & (df_HIV['Q10a'].notna()) , "valid",
-        #                               np.where((df_HIV['Q9a'] == "No") & (df_HIV['Q10a'].isna()), "valid", None))
+        df_HIV['Q10a_val'] = np.where((df_HIV['Q2a'] == "Male") & (df_HIV['Q10a'].notna()) , "valid",
+                                       np.where((df_HIV['Q2a'] == "Female") & (df_HIV['Q10a'].isna()), "valid", None))
         
         
          #########
